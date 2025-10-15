@@ -97,3 +97,12 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV01.png
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUVo01.png.meta
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV01_N.png
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV01_N.png.meta
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV02.png
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV02.png.meta
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV02_N.png
+/[Aa]ssets/TerrainTexturesPackFree/TerrainTextures/GrassUV01_N.png.meta
