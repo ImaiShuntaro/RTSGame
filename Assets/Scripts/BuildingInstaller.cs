@@ -12,7 +12,10 @@ public class BuildingInstaller : MonoBehaviour
     [SerializeField] private GameObject fieldPrefab;
     private GameObject building;
 
-    private HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
+    // åöï®ÇÃç¿ïW åöï®ÇÃëÂÇ´Ç≥ÇÕ3x3Ç≈å≈íË
+    public HashSet<Vector3> buildingPosition = new HashSet<Vector3>();
+    private bool isBuilding = false;
+    public bool IsBuilding {  get { return isBuilding; } set { isBuilding = value; } }
 
     private void Start()
     {
@@ -27,7 +30,7 @@ public class BuildingInstaller : MonoBehaviour
         {
             xzMousePos = ray.GetPoint(distance);
         }
-        constractPos = ConstractPosition(xzMousePos);
+        constractPos = GridPosition(xzMousePos);
         if (building != null && !building.GetComponent<LandManager>().IsPlaced)
         {
             building.transform.position = constractPos;
@@ -35,7 +38,7 @@ public class BuildingInstaller : MonoBehaviour
             bool canPlace = true;
             foreach (Vector3 pos in landManager.OccpiedSpace)
             {
-                if (occupiedPositions.Contains(pos))
+                if (buildingPosition.Contains(pos))
                 {
                     canPlace = false;
                     break;
@@ -58,20 +61,22 @@ public class BuildingInstaller : MonoBehaviour
                     }
                     foreach (Vector3 pos in landManager.OccpiedSpace)
                     {
-                        occupiedPositions.Add(pos);
+                        buildingPosition.Add(pos);
                     }
+                    isBuilding = false;
                     building = null;
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {
                     Destroy(building);
+                    isBuilding = false;
                     building = null;
                 }
             }
         }
     }
 
-    private Vector3 ConstractPosition(Vector3 position)
+    public Vector3 GridPosition(Vector3 position)
     {
         Vector3 constractPos = position;
         float absX = Mathf.Abs(position.x);
@@ -103,23 +108,13 @@ public class BuildingInstaller : MonoBehaviour
         return constractPos;
     }
 
-    public void OnSmallHouseButtonClicked()
+    public void BuildingInstance(GameObject buildingPrefab)
     {
-        building = Instantiate(smallHousePrefab, constractPos, Quaternion.identity);
-    }
-
-    public void OnMediumHouseButtonClicked()
-    {
-        building = Instantiate(mediumHousePrefab, constractPos, Quaternion.identity);
-    }
-
-    public void OnBigHouseButtonClicked()
-    {
-        building = Instantiate(bigHousePrefab, constractPos, Quaternion.identity);
-    }
-
-    public void OnFieldButtonClicked()
-    {
-        building = Instantiate(fieldPrefab, constractPos, Quaternion.identity);
+        if (buildingPrefab == null) 
+        {
+            return;
+        }
+        building = Instantiate(buildingPrefab, constractPos, Quaternion.identity);
+        isBuilding = true;
     }
 }
