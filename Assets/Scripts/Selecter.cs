@@ -27,6 +27,12 @@ public class Selecter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (buildingInstaller.IsBuilding || Input.GetMouseButtonDown(1))
+        {
+            isMoving = false;
+            selectedUI.SetActive(false);
+            destinationSigh.SetActive(false);
+        }
         if (Input.GetMouseButtonDown(0) && !GetComponent<BuildingInstaller>().IsBuilding)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -64,6 +70,7 @@ public class Selecter : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     destination = gridPos;
+                    destinationSigh.SetActive(true);
                     destinationSigh.transform.position = destination;
                     selectedObject.GetComponent<MoveCommander>().MoveTo(destination, buildingInstaller.buildingPosition);
                     //selectedObject.GetComponent<MoveCommander>().Astar(destination);

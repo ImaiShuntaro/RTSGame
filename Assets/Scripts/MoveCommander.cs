@@ -143,6 +143,7 @@ public class MoveCommander : MonoBehaviour
         {
             // y は自オブジェクトの y を維持
             Vector3 dest = new Vector3(target.x, transform.position.y, target.z);
+            transform.LookAt(dest);
             while (Vector3.SqrMagnitude(transform.position - dest) > 0.001f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, dest, speed * Time.deltaTime);
